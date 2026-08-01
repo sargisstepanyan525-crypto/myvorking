@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>სოციალური აგენტის სამუშაო პორტალი</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts ქართული ენისთვის -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- გვერდითი მენიუ (Sidebar) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">🏛️</div>
+                <div class="brand-text">
+                    <h2>SSA PORTAL</h2>
+                    <span>სოციალური აგენტი</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="dashboard">
+                    <span class="icon">📊</span>
+                    <span>მთავარი (Dashboard)</span>
+                </button>
+                <button class="nav-btn" data-tab="cases">
+                    <span class="icon">📋</span>
+                    <span>განაცხადების სია</span>
+                </button>
+                <button class="nav-btn" data-tab="declaration">
+                    <span class="icon">📝</span>
+                    <span>ახალი დეკლარაცია</span>
+                </button>
+            </nav>
+
+            <div class="user-profile">
+                <div class="avatar">SA</div>
+                <div class="user-info">
+                    <h4>სოციალური აგენტი</h4>
+                    <p>რეგიონული ცენტრი</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ძირითადი სამუშაო არეალი (Main Content) -->
+        <main class="main-content">
+            <!-- ზედა ზოლი (Header) -->
+            <header class="top-header">
+                <h1 id="page-title">საინფორმაციო დაფა</h1>
+                <div class="header-actions">
+                    <span class="status-badge live">● სისტემა აქტიურია</span>
+                </div>
+            </header>
+
+            <!-- 1. DASHBOARD TAB -->
+            <section id="dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📁</div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-total">0</span>
+                            <span class="stat-label">სულ განაცხადი</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">⏳</div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-pending">0</span>
+                            <span class="stat-label">ვიზიტი დაგეგმილია</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">✅</div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-completed">0</span>
+                            <span class="stat-label">შეფასებული</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3>ბოლო აქტივობები</h3>
+                    <div id="recent-list" class="recent-list">
+                        <!-- JS შეავსებს ამ სიას -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. CASES TAB -->
+            <section id="cases" class="tab-content">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>ოჯახის უფროსი</th>
+                                <th>მისამართი</th>
+                                <th>წევრები</th>
+                                <th>სტატუსი</th>
+                                <th>სავარაუდო ქულა</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cases-table-body">
+                            <!-- JS შეავსებს ცხრილს -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 3. DECLARATION FORM TAB -->
+            <section id="declaration" class="tab-content">
+                <form id="social-form" class="declaration-form">
+                    <div class="form-section">
+                        <h3>1. ძირითადი ინფორმაცია</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="fullname">ოჯახის უფროსის სახელი, გვარი</label>
+                                <input type="text" id="fullname" required placeholder="მაგ. გიორგი ბერიძე">
+                            </div>
+                            <div class="input-group">
+                                <label for="personal-id">პირადი ნომერი</label>
+                                <input type="text" id="personal-id" maxlength="11" required placeholder="11-ნიშნა ნომერი">
+                            </div>
+                            <div class="input-group">
+                                <label for="address">მისამართი</label>
+                                <input type="text" id="address" required placeholder="ქალაქი, ქუჩა, ბინის N">
+                            </div>
+                            <div class="input-group">
+                                <label for="members-count">ოჯახის წევრთა რაოდენობა</label>
+                                <input type="number" id="members-count" min="1" value="1" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>2. სოციალურ-ეკონომიკური მაჩვენებლები</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="income">თვიური ჯამური შემოსავალი (₾)</label>
+                                <input type="number" id="income" min="0" value="0" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="property">უძრავი/მოძრავი ქონება</label>
+                                <select id="property">
+                                    <label>ქონების მდგომარეობა</label>
+                                    <option value="none">არაფერი (მძიმე პირობები)</option>
+                                    <option value="basic">მინიმალური (ძველი სახლი/საყოფაცხოვრებო ნივთები)</option>
+                                    <option value="good">სტანდარტული (სარემონტო ბინა, ავტომობილი)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="vulnerable">სპეციალური სტატუსი</label>
+                                <select id="vulnerable">
+                                    <option value="none">არ აქვს</option>
+                                    <option value="disabled">შშმ პირები ოჯახში</option>
+                                    <option value="pensioner">მარტოხელა პენსიონერი</option>
+                                    <option value="single_parent">მარტოხელა მშობელი / მრავალშვილიანი</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">💾 დეკლარაციის შენახვა და შეფასება</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
