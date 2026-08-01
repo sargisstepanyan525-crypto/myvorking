@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>სოციალური აგენტის სამუშაო პორტალი</title>
+    <title>სოციალური აგენტის სამუშაო პორტალი | SSA</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts ქართული ენისთვის -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,8 +17,8 @@
             <div class="brand">
                 <div class="logo-icon">🏛️</div>
                 <div class="brand-text">
-                    <h2>SSA PORTAL</h2>
-                    <span>სოციალური აგენტი</span>
+                    <h2>სოციალური სააგენტო</h2>
+                    <span>დეკლარირების პორტალი</span>
                 </div>
             </div>
 
@@ -30,7 +29,7 @@
                 </button>
                 <button class="nav-btn" data-tab="cases">
                     <span class="icon">📋</span>
-                    <span>განაცხადების სია</span>
+                    <span>დეკლარაციების ბაზა</span>
                 </button>
                 <button class="nav-btn" data-tab="declaration">
                     <span class="icon">📝</span>
@@ -42,18 +41,17 @@
                 <div class="avatar">SA</div>
                 <div class="user-info">
                     <h4>სოციალური აგენტი</h4>
-                    <p>რეგიონული ცენტრი</p>
+                    <p>ტერიტორიული ორგანო</p>
                 </div>
             </div>
         </aside>
 
-        <!-- ძირითადი სამუშაო არეალი (Main Content) -->
+        <!-- ძირითადი სამუშაო არეალი -->
         <main class="main-content">
-            <!-- ზედა ზოლი (Header) -->
             <header class="top-header">
                 <h1 id="page-title">საინფორმაციო დაფა</h1>
                 <div class="header-actions">
-                    <span class="status-badge live">● სისტემა აქტიურია</span>
+                    <span class="status-badge live">● SSA Online Database</span>
                 </div>
             </header>
 
@@ -64,30 +62,28 @@
                         <div class="stat-icon blue">📁</div>
                         <div class="stat-details">
                             <span class="stat-value" id="stat-total">0</span>
-                            <span class="stat-label">სულ განაცხადი</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange">⏳</div>
-                        <div class="stat-details">
-                            <span class="stat-value" id="stat-pending">0</span>
-                            <span class="stat-label">ვიზიტი დაგეგმილია</span>
+                            <span class="stat-label">რეგისტრირებული დეკლარაცია</span>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon green">✅</div>
                         <div class="stat-details">
-                            <span class="stat-value" id="stat-completed">0</span>
-                            <span class="stat-label">შეფასებული</span>
+                            <span class="stat-value" id="stat-vulnerable">0</span>
+                            <span class="stat-label">მიზნობრივი დახმარების მიმღები (&lt;70k)</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">📉</div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-avg-score">0</span>
+                            <span class="stat-label">საშუალო სარეიტინგო ქულა</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="recent-section">
-                    <h3>ბოლო აქტივობები</h3>
-                    <div id="recent-list" class="recent-list">
-                        <!-- JS შეავსებს ამ სიას -->
-                    </div>
+                    <h3>ბოლოს დარეგისტრირებული დეკლარაციები</h3>
+                    <div id="recent-list" class="recent-list"></div>
                 </div>
             </section>
 
@@ -97,77 +93,168 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>დეკლარაციის N</th>
                                 <th>ოჯახის უფროსი</th>
+                                <th>პირადი N</th>
                                 <th>მისამართი</th>
                                 <th>წევრები</th>
+                                <th>სარეიტინგო ქულა</th>
                                 <th>სტატუსი</th>
-                                <th>სავარაუდო ქულა</th>
                             </tr>
                         </thead>
-                        <tbody id="cases-table-body">
-                            <!-- JS შეავსებს ცხრილს -->
-                        </tbody>
+                        <tbody id="cases-table-body"></tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- 3. DECLARATION FORM TAB -->
+            <!-- 3. REAL DECLARATION FORM TAB -->
             <section id="declaration" class="tab-content">
                 <form id="social-form" class="declaration-form">
+                    
+                    <!-- ბლოკი 1: ზოგადი ინფორმაცია -->
                     <div class="form-section">
-                        <h3>1. ძირითადი ინფორმაცია</h3>
+                        <h3>I. ოჯახის უფროსისა და მისამართის მონაცემები</h3>
                         <div class="form-grid">
                             <div class="input-group">
-                                <label for="fullname">ოჯახის უფროსის სახელი, გვარი</label>
+                                <label for="fullname">ოჯახის უფროსის სახელი, გვარი *</label>
                                 <input type="text" id="fullname" required placeholder="მაგ. გიორგი ბერიძე">
                             </div>
                             <div class="input-group">
-                                <label for="personal-id">პირადი ნომერი</label>
-                                <input type="text" id="personal-id" maxlength="11" required placeholder="11-ნიშნა ნომერი">
+                                <label for="personal-id">პირადი ნომერი (11 ნიშნა) *</label>
+                                <input type="text" id="personal-id" maxlength="11" pattern="\d{11}" required placeholder="010XXXXXXXX">
                             </div>
                             <div class="input-group">
-                                <label for="address">მისამართი</label>
-                                <input type="text" id="address" required placeholder="ქალაქი, ქუჩა, ბინის N">
+                                <label for="region">რეგიონი / მუნიციპალიტეტი *</label>
+                                <input type="text" id="region" required placeholder="მაგ. თბილისი, ნაძალადევი">
                             </div>
                             <div class="input-group">
-                                <label for="members-count">ოჯახის წევრთა რაოდენობა</label>
-                                <input type="number" id="members-count" min="1" value="1" required>
+                                <label for="address">ფაქტობრივი მისამართი *</label>
+                                <input type="text" id="address" required placeholder="ქუჩა, კორპუსი, ბინა">
+                            </div>
+                            <div class="input-group">
+                                <label for="phone">საკონტაქტო ტელეფონი *</label>
+                                <input type="tel" id="phone" required placeholder="5XX XX XX XX">
                             </div>
                         </div>
                     </div>
 
+                    <!-- ბლოკი 2: ოჯახის შემადგენლობა -->
                     <div class="form-section">
-                        <h3>2. სოციალურ-ეკონომიკური მაჩვენებლები</h3>
+                        <h3>II. ოჯახის შემადგენლობა და სოციალური სტატუსები</h3>
                         <div class="form-grid">
                             <div class="input-group">
-                                <label for="income">თვიური ჯამური შემოსავალი (₾)</label>
-                                <input type="number" id="income" min="0" value="0" required>
+                                <label for="members-count">სულ ოჯახის წევრთა რაოდენობა *</label>
+                                <input type="number" id="members-count" min="1" max="15" value="1" required>
                             </div>
                             <div class="input-group">
-                                <label for="property">უძრავი/მოძრავი ქონება</label>
-                                <select id="property">
-                                    <label>ქონების მდგომარეობა</label>
-                                    <option value="none">არაფერი (მძიმე პირობები)</option>
-                                    <option value="basic">მინიმალური (ძველი სახლი/საყოფაცხოვრებო ნივთები)</option>
-                                    <option value="good">სტანდარტული (სარემონტო ბინა, ავტომობილი)</option>
+                                <label for="children-count">18 წლამდე ბავშვების რაოდენობა</label>
+                                <input type="number" id="children-count" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="elderly-count">პენსიონერების რაოდენობა (65+)</label>
+                                <input type="number" id="elderly-count" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="disabled-count">მკვეთრად/მნიშვნელოვნად გამოხატული შშმ პირები</label>
+                                <input type="number" id="disabled-count" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="single-parent">ოჯახის ტიპი</label>
+                                <select id="single-parent">
+                                    <option value="standard">სტანდარტული ოჯახი</option>
+                                    <option value="single_mother">მარტოხელა დედა/მამა</option>
+                                    <option value="orphan_care">მზრუნველობამოკლებული ბავშვები</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ბლოკი 3: საცხოვრებელი პირობები -->
+                    <div class="form-section">
+                        <h3>III. საცხოვრებელი პირობები და ინფრასტრუქტურა</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="housing-status">საცხოვრებლის სტატუსი</label>
+                                <select id="housing-status">
+                                    <option value="owned">საკუთარი ბინა/სახლი</option>
+                                    <option value="rented">ნაქირავები / იჯარა</option>
+                                    <option value="temporary">დროებითი თავშესაფარი / ნათესავთან</option>
+                                    <option value="emergency">ავარიული / სიცოცხლისთვის საშიში</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <label for="vulnerable">სპეციალური სტატუსი</label>
-                                <select id="vulnerable">
-                                    <option value="none">არ აქვს</option>
-                                    <option value="disabled">შშმ პირები ოჯახში</option>
-                                    <option value="pensioner">მარტოხელა პენსიონერი</option>
-                                    <option value="single_parent">მარტოხელა მშობელი / მრავალშვილიანი</option>
+                                <label for="housing-area">საცხოვრებელი ფართობი ($m^2$)</label>
+                                <input type="number" id="housing-area" min="5" value="50">
+                            </div>
+                            <div class="input-group">
+                                <label for="heating">გათბობის ძირითადი საშუალება</label>
+                                <select id="heating">
+                                    <option value="central">ცენტრალური / ბუნებრივი აირი</option>
+                                    <option value="wood">შეშის ღუმელი</option>
+                                    <option value="electric">ელექტრო გამათბობელი</option>
+                                    <option value="none">არ აქვს გათბობა</option>
                                 </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="sanitation">სანიტარიული კვანძი (ტუალეტი/აბაზანა)</label>
+                                <select id="sanitation">
+                                    <option value="inside">შიდა (სტანდარტული)</option>
+                                    <option value="outside">ეზოში (მშრალი)</option>
+                                    <option value="shared">საერთო სარგებლობის</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ბლოკი 4: ოჯახის ქონება და ტექნიკა -->
+                    <div class="form-section">
+                        <h3>IV. ოჯახის მფლობელობაში არსებული ქონება და ტექნიკა</h3>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" id="has-car"> მსუბუქი ავტომობილი</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-fridge" checked> მაცივარი</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-washing"> სარეცხი მანქანა</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-tv" checked> ტელევიზორი</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-pc"> კომპიუტერი / ლეპტოპი</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-ac"> კონდიციონერი</label>
+                            <label class="checkbox-item"><input type="checkbox" id="has-tractor"> ტრაქტორი / აგრო-ტექნიკა</label>
+                        </div>
+                    </div>
+
+                    <!-- ბლოკი 5: შემოსავლები, ხარჯები და სოფლის მეურნეობა -->
+                    <div class="form-section">
+                        <h3>V. ფინანსური მაჩვენებლები და სოფლის მეურნეობა</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="salary-income">თვიური ხელფასი / სამეწარმეო შემოსავალი (₾)</label>
+                                <input type="number" id="salary-income" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="pension-income">პენსია / სახელმწიფო დახმარებები (₾)</label>
+                                <input type="number" id="pension-income" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="remittance">უცხოეთიდან გზავნილები / დახმარება (₾)</label>
+                                <input type="number" id="remittance" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="utility-cost">საშუალო თვიური კომუნალური ხარჯი (₾)</label>
+                                <input type="number" id="utility-cost" min="0" value="50">
+                            </div>
+                            <div class="input-group">
+                                <label for="land-area">სასოფლო-სამეურნეო მიწის ფართობი (ჰექტარი)</label>
+                                <input type="number" step="0.1" id="land-area" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="livestock">მსხვილფეხა პირუტყვის რაოდენობა (სული)</label>
+                                <input type="number" id="livestock" min="0" value="0">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">💾 დეკლარაციის შენახვა და შეფასება</button>
+                        <button type="submit" class="btn btn-primary">💾 დეკლარაციის რეგისტრაცია და ქულის გაანგარიშება</button>
                     </div>
+
                 </form>
             </section>
         </main>
